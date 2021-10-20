@@ -1,0 +1,60 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Picturer.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" SupportedOrientations="Portrait" BackKeyPress="PhoneApplicationPage_BackKeyPress">
+
+    <!--数据上下文设置为上面的示例数据，并且 LayoutRoot 包含根网格，其他所有页面内容都位于根网格中-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="0" />
+            <RowDefinition Height="0" />
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0">
+            <TextBlock x:Name="ApplicationTitle" Text="Picturer" Style="{StaticResource PhoneTextNormalStyle}"/>
+        </StackPanel>
+
+        <!--ContentPanel 包含 ListBox 和 ListBox ItemTemplate。在此处放置其他内容-->
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <ListBox x:Name="MainListBox" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility = "Hidden" />
+        </Grid>
+
+        <Grid x:Name="TailPanel" Grid.Row="2">
+            <ProgressBar IsIndeterminate="False" x:Name="progress" Background="#001BA1E2" VerticalAlignment="Top" />
+            <ScrollViewer MaxWidth="450" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                <TextBlock MinWidth="450" x:Name="resultText" Style="{StaticResource PhoneTextNormalStyle}" TextAlignment="Center" />
+            </ScrollViewer>
+        </Grid>
+        
+        <Grid Grid.Row="3">
+            <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu x:Name="zipMenu" Closed="menu_Closed">
+                    <toolkit:MenuItem Header="删除文件包" Click="delete_Click" />
+                    <toolkit:MenuItem Header="解压文件包" Click="unzip_Click" />
+                </toolkit:ContextMenu>
+            </toolkit:ContextMenuService.ContextMenu>
+        </Grid>
+        
+        <Grid Grid.Row="4">
+            <toolkit:ContextMenuService.ContextMenu>
+                <toolkit:ContextMenu x:Name="dirMenu" Closed="menu_Closed">
+                    <toolkit:MenuItem Header="重命名文件夹" Click="rename_Click" />
+                    <toolkit:MenuItem Header="删除文件夹" Click="remove_Click" />
+                    <toolkit:MenuItem Header="剪切文件" Click="cut_Click" x:Name="cut" />
+                    <toolkit:MenuItem Header="剪切至此处" Click="cutTo_Click" x:Name="cutTo" Visibility="Collapsed" />
+                </toolkit:ContextMenu>
+            </toolkit:ContextMenuService.ContextMenu>
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>
